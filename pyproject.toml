@@ -1,0 +1,47 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "eduly"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "deepagents>=0.3.1",
+    "dotenv>=0.9.9",
+    "google-genai>=1.56.0",
+    "ipykernel>=7.1.0",
+    "langchain-google-genai>=4.1.2",
+    "manim==0.19.1",
+    "pydantic>=2.0.0",
+    "tqdm>=4.67.1",
+]
+
+
+authors = [
+    {name = "Srinivas Billa", email = "srinivas.billa@eduly.ai"}
+]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+]
+license = "CC-BY-NC-SA-4.0"
+
+[project.urls]
+Homepage = "https://github.com/eduly-ai/eduly"
+Issues = "https://github.com/eduly-ai/eduly/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/eduly"]
+
+[tool.ruff]
+line-length = 200
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = false
