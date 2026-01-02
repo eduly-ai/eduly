@@ -193,10 +193,39 @@ Each scene includes:
 - **title** — An evocative name for the scene
 - **visual_description** — A filmmaker's screenplay describing exactly what appears on screen
 
+#### Manim Animation Generation (Work in Progress)
+
+The final step transforms storyboards into actual **animated videos** using [Manim](https://www.manim.community/) — the mathematical animation library made famous by 3Blue1Brown.
+
+##### The Challenge with LLM-Generated Animation Code
+
+LLMs are trained on older versions of libraries, and Manim's API evolves frequently. Asking an LLM to "write Manim code" often produces:
+- Deprecated method calls
+- Incorrect parameter names
+- Non-existent classes from older API versions
+- Code that simply doesn't compile
+
+##### Our Solution: Custom Coding Agents with Live Documentation
+
+Instead of relying on stale training data, we built a **custom coding agent** that has access to up-to-date Manim documentation at runtime. The agent:
+
+1. **Researches before coding** — Always looks up the exact API signatures, parameters, and examples from the docs before writing any code
+2. **Has a complete documentation workspace** — Markdown files covering tutorials, guides, and full API reference
+3. **Uses file system tools** — Can `ls`, `read_file`, `grep`, `glob`, and `edit_file` to explore docs and write code
+4. **Iterates on errors** — When rendering fails, it reads the error output and fixes the code
+
+The agent workspace contains:
+- `manim_docs/` — Complete Manim documentation (tutorials, guides, 385 API reference files)
+- `workspace/` — Where the agent writes and iterates on `scene.py`
+
+##### Example Output
+
+
 ## Roadmap
 
 - [x] Storyboard creation from atomic topics
-- [ ] Visual explanation generation (diagrams, animations)
+- [x] Manim coding agent with live documentation access
+- [ ] Video QA feedback loop (LLM watches video, suggests fixes)
 - [ ] Content delivery platform (Vertical scrolling feed Web/iOS/Android)
 - [ ] Citation graph and "continue learning" recommendations
 - [ ] arXiv monitoring and automatic trending paper analysis
