@@ -234,4 +234,4 @@ The agent workspace contains:
 
 ## License
 
-AGPL-3.0
+CC-BY-NC-SA
