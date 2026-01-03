@@ -4,7 +4,7 @@
 
 🌐 **[landing.eduly.ai](https://landing.eduly.ai)**
 
-![example](examples/deepseek_mhc_renders/deepseek_mhc_animation_0.mp4) 
+![example](examples/deepseek_mhc_renders/deepseek_mhc.gif) 
 ---
 
 ## TL;DR
