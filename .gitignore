@@ -208,4 +208,4 @@ __marimo__/
 
 .env
 *.DS_Store
-notebooks/prototyping/agent_workspace/workspace/
+testing/*

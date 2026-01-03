@@ -71,7 +71,7 @@ You may also receive the source document for additional context.
 2-3 sentences describing your core visual approach. What's the central metaphor? What will viewers remember?
 
 ### scenes
-Up to 5 scenes that build a complete visual narrative:
+8-15 scenes that build a complete visual narrative (target ~5 minutes of content):
 
 **scene_type**: 
 - `hook` - Opening. A striking visual that creates curiosity

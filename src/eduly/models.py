@@ -1,5 +1,6 @@
 """Pydantic models for document breakdown and storyboard generation."""
 
+import pathlib
 from typing import Literal
 
 from pydantic import BaseModel, Field
@@ -86,4 +87,16 @@ class TopicStoryboard(BaseModel):
     scenes: list[Scene] = Field(
         description="Ordered scenes (hook → mid scenes → closing) that tell the complete visual story. Each scene must have exhaustively detailed visual descriptions."
     )
+
+
+class AnimationResult(BaseModel):
+    """Result of an animation generation attempt."""
+
+    topic_index: int = Field(description="Index of the topic in the breakdown")
+    topic_name: str = Field(description="Name of the topic")
+    success: bool = Field(description="Whether the animation was successfully generated")
+    video_path: pathlib.Path | None = Field(default=None, description="Path to the generated video file")
+    scene_code: str | None = Field(default=None, description="The generated Manim scene code")
+    error_message: str | None = Field(default=None, description="Error message if generation failed")
+    iterations: int = Field(default=0, description="Number of iterations taken to generate the animation")
 

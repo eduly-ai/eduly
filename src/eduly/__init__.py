@@ -2,10 +2,19 @@
 Eduly - Anti-brainrot Doom Learning
 """
 
-from eduly.client import EdulyClient
-from eduly.models import AtomicTopic, Breakdown, Scene, TopicStoryboard
+from eduly.client import EdulyAnimationClient, EdulyBreakdownClient, EdulyClient
+from eduly.models import AnimationResult, AtomicTopic, Breakdown, Scene, TopicStoryboard
 
 __version__ = "0.1.0"
 
-__all__ = ["EdulyClient", "AtomicTopic", "Breakdown", "Scene", "TopicStoryboard"]
+__all__ = [
+    "AnimationResult",
+    "AtomicTopic",
+    "Breakdown",
+    "EdulyAnimationClient",
+    "EdulyBreakdownClient",
+    "EdulyClient",  # Backwards compatibility alias for EdulyBreakdownClient
+    "Scene",
+    "TopicStoryboard",
+]
 

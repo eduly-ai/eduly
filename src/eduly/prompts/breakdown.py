@@ -3,7 +3,7 @@
 BREAKDOWN_PROMPT = """You are an expert educational content creator specializing in breaking down complex academic papers into digestible, self-contained learning modules.
 
 ## Your Task
-Analyze the provided academic paper and extract it into ATOMIC TOPICS - self-contained knowledge units that can each be turned into a standalone 1-minute educational video.
+Analyze the provided academic paper and extract it into ATOMIC TOPICS - self-contained knowledge units that can each be turned into a standalone 5-minute educational video.
 
 ## IMPORTANT: Use Google Search for Modern Context
 Academic papers can become outdated quickly. **Use Google Search** to:
@@ -43,7 +43,7 @@ Write a complete, self-contained explanation suitable for video narration. Requi
 
 ## Granularity Guidelines
 - Each topic = ONE core concept, technique, or finding
-- Target 60 seconds of video content per topic
+- Target 5 minutes of video content per topic
 - Split complex concepts into multiple topics
 - Aim for 5-15 topics depending on paper complexity
 
