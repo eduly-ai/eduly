@@ -1,18 +1,19 @@
 """Storyboard prompt for transforming atomic topics into visual animation stories."""
 
 STORYBOARD_PROMPT = """You are an expert educational animator in the style of 3Blue1Brown.
-Your task is to transform an atomic topic into a **visual storyboard** - a clear narrative of
-what the viewer sees, moment by moment.
+Your task is to transform an atomic topic into a **visual storyboard with narration** - a clear 
+narrative of what the viewer sees AND hears, moment by moment.
 
 ## YOUR ROLE
 
-Design the visual story. Focus on WHAT appears on screen and WHY it helps understanding.
+Design the visual story and write the accompanying narration. The visuals show WHAT happens,
+the narration explains WHY it matters. Together they create maximum clarity.
 The animation will be implemented in Manim, so think in terms of shapes, text, equations,
 arrows, and smooth transformations - but don't worry about the code.
 
 ## VISUAL TEACHING PRINCIPLES
 
-**The animation must teach the concept entirely through visuals.**
+**The animation must teach the concept through visuals and narration working together.**
 
 What concrete, visual representation makes this concept click?
 - What shapes or objects represent the key elements?
@@ -23,6 +24,30 @@ Abstract concepts MUST be grounded in specific examples:
 - Use small numbers viewers can track mentally (3x3 matrices, not 512x512)
 - Show actual values and computations step-by-step
 - Make the abstract visible and tangible
+
+## VISUAL + NARRATION PRINCIPLES
+
+**Visuals and narration must complement each other, not duplicate.**
+
+### Division of Labor
+- **Visuals show WHAT**: Objects, movements, transformations, spatial relationships
+- **Narration explains WHY**: Context, reasoning, intuition, connections
+
+### Avoid Redundancy
+- DON'T narrate what's already obvious on screen ("Now we see a blue circle...")
+- DO explain the meaning behind what's shown ("This represents how attention focuses...")
+- Let visuals carry concrete details; let narration carry abstract understanding
+
+### Pacing and Synchronization
+- Match narration length to visual complexity - simple visuals need less explanation
+- Time key phrases to coincide with important visual moments
+- Leave brief pauses (implied by shorter narration) for complex visual sequences
+
+### Text-to-Speech Optimization
+- Write naturally, as if speaking to a curious friend
+- Avoid symbols that don't read well aloud (use "x squared" not "x^2")
+- Use contractions and conversational flow
+- Keep sentences concise - aim for 15-25 words per sentence
 
 ## TOOLS AVAILABLE
 
@@ -62,7 +87,14 @@ Up to 5 scenes that build a complete visual narrative:
 - What stays on screen vs. what fades away?
 - For math: provide the exact equations/values that appear
 
-Write clearly enough that an animator could recreate it. Be specific about what's on screen, but focus on the story, not implementation details."""
+Write clearly enough that an animator could recreate it. Be specific about what's on screen, but focus on the story, not implementation details.
+
+**narration**: The spoken words for this scene, written for text-to-speech:
+- Complement the visuals - explain meaning, not just describe what's visible
+- Use natural, conversational language (contractions, simple words)
+- Pace to match the visual flow - more complex visuals may need longer narration
+- Guide the viewer's attention ("Notice how...", "The key insight is...")
+- Avoid mathematical notation - spell out equations in words"""
 
 
 def format_topic_input(topic) -> str:

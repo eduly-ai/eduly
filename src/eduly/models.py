@@ -45,7 +45,7 @@ class Breakdown(BaseModel):
 
 
 class Scene(BaseModel):
-    """A single scene in the storyboard - a complete visual sequence."""
+    """A single scene in the storyboard - a complete visual and audio sequence."""
 
     scene_type: Literal["hook", "mid", "closing"] = Field(
         default="mid",
@@ -61,12 +61,18 @@ class Scene(BaseModel):
         Include: what appears, where it appears, how it moves, what colors/sizes, what transforms into what,
         spatial relationships, visual metaphors, and the emotional arc of the scene."""
     )
+    narration: str = Field(
+        description="The spoken narration for this scene, written for text-to-speech. "
+        "Should complement (not duplicate) the visuals - explain what the viewer sees, "
+        "provide context, and guide their understanding. Paced to match the visual flow."
+    )
 
     def to_text(self) -> str:
         """Convert the scene to a formatted string."""
         return (
-            f"## [{self.scene_type}] {self.title}\n"
-            f"{self.visual_description}\n"
+            f"## [{self.scene_type}] {self.title}\n\n"
+            f"**Visual Description:**\n{self.visual_description}\n"
+            f"**Narration:**\n{self.narration}\n"
         )
 
 
