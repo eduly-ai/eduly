@@ -4,6 +4,16 @@
 
 🌐 **[landing.eduly.ai](https://landing.eduly.ai)**
 
+---
+
+## TL;DR
+
+Eduly is a **Manim Coding Agent** built to break down and explain any content through beautiful, animated visualizations. It transforms complex papers and documents into short-form educational videos in the style of 3Blue1Brown.
+
+**Built with:** [Gemini 2.5](https://deepmind.google/models/gemini/) + [LangChain's Deepagents](https://github.com/langchain-ai/deepagents)
+
+---
+
 ## The Problem
 
 Since the rise of short-form content (TikTok, YouTube Shorts, Instagram Reels), "brain-rot" has emerged as the term describing cognitive decline from reliance on content designed for short attention spans. While governments respond with bans, we believe there's a better approach.
