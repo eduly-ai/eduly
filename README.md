@@ -1,44 +1,55 @@
-# Eduly
+<p align="center">
+  <img src="examples/deepseek_mhc_renders/deepseek_mhc.gif" alt="Eduly Demo" width="300"/>
+</p>
 
-**Anti-brainrot Doom Learning** — Game the brain into educating itself.
+<h1 align="center">Eduly</h1>
 
-🌐 **[landing.eduly.ai](https://landing.eduly.ai)**
+<p align="center">
+  <strong>Transform any content into beautiful animated explanations</strong>
+</p>
 
-![example](examples/deepseek_mhc_renders/deepseek_mhc.gif) 
+<p align="center">
+  <a href="https://landing.eduly.ai">Website</a> •
+  <a href="https://github.com/eduly-ai/eduly">GitHub</a> •
+  <a href="https://discord.gg/eduly">Discord</a>
+</p>
+
 ---
 
-## TL;DR
+## The Vision
 
-Eduly is a **Manim Coding Agent** built to break down and explain any content through beautiful, animated visualizations. It transforms complex papers and documents into short-form educational videos in the style of 3Blue1Brown.
+### Learning shouldn't feel like decoding
 
-**Built with:** [Gemini 2.5](https://deepmind.google/models/gemini/) + [LangChain's Deepagents](https://github.com/langchain-ai/deepagents)
+Every day, students stare at textbooks wondering what the words *really* mean. Researchers wade through papers, trying to visualize abstract concepts in their minds. Educators spend hours creating materials that still fail to click.
+
+**The issue isn't intelligence—it's medium.**
+
+Text is powerful, but it's not always the right tool. Some ideas need to be *seen* to be understood.
+
+Eduly is a **Manim Coding Agent** that transforms any content into stunning, 3Blue1Brown-style animated visualizations. Built with [Gemini 2.5](https://deepmind.google/models/gemini/) and [LangChain](https://github.com/langchain-ai/langchain).
 
 ---
 
-## The Problem
+## Use Cases
 
-Since the rise of short-form content (TikTok, YouTube Shorts, Instagram Reels), "brain-rot" has emerged as the term describing cognitive decline from reliance on content designed for short attention spans. While governments respond with bans, we believe there's a better approach.
+**One tool, many transformations.** Eduly adapts to how you work.
 
-**There is no equivalent form of "anti-brain-rot"** — until now.
+| Who | Input | Output |
+|-----|-------|--------|
+| 🎓 **Students** | PDF, notes, textbook chapters | Animated explainer videos — study smarter, not harder |
+| 🏫 **Educators** | PowerPoint slides | Slides with contextual animations — no more static bullet points |
+| 🔬 **Researchers** | Academic papers | Visual concept breakdowns — grasp dense papers quickly, share your work effectively |
+| 🎥 **Content Creators** | Script or outline | Production-ready animations — no code required |
+| 💼 **Enterprise** | Docs, diagrams, specs | Visual explainers & walkthroughs for training materials teams actually engage with |
+| 📖 **Open Source** | Technical documentation | Animated onboarding guides — help contributors understand your architecture faster |
 
-### Why Existing Tools Fall Short
+---
 
-Current learning tools share common barriers:
-- **Paid subscriptions** — $10-20/month discourages students and casual learners
-- **Traditional curriculum flow** — Learning styles that haven't evolved in decades
-- **Still too long-form** — 10-minute podcasts feel quick, but younger generations seek <1 minute instant gratification
+## Open Source
 
-The barrier to entry is simply too high.
+### Education should be free
 
-## Our Vision
-
-We model the solution like a social media platform. Open Eduly and instantly dive into short, TikTok-style educational content.
-
-### Goals
-
-- **Short-form** (~5 min) explanations of technical concepts through videos and visual explanations
-- **Trending research** by monitoring arXiv and conferences, breaking down papers into core concepts that spark curiosity
-- **Explicit citations** and links back to longer-form content when something ignites interest
+We believe the tools for learning shouldn't be locked behind paywalls. Eduly is open source because **knowledge belongs to everyone**. We're building in public, with the community, for the community.
 
 ---
 
@@ -72,7 +83,6 @@ cp .env.example .env
 
 ```python
 import pathlib
-import pickle
 from google import genai
 from eduly import EdulyBreakdownClient, EdulyAnimationClient
 
@@ -139,9 +149,9 @@ See [`examples/processing.ipynb`](examples/processing.ipynb) for a complete walk
 
 ---
 
-## Architecture
+## How It Works
 
-Eduly uses a three-stage pipeline to convert academic papers into animated educational videos:
+Eduly uses a three-stage pipeline to convert content into animated educational videos:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
@@ -150,11 +160,10 @@ Eduly uses a three-stage pipeline to convert academic papers into animated educa
 
   ┌──────────┐         ┌───────────────┐         ┌────────────────┐
   │          │         │               │         │                │
-  │   PDF    │────────▶│   BREAKDOWN   │────────▶│   STORYBOARD   │
-  │  INPUT   │         │    AGENT      │         │     AGENT      │
-  │          │         │               │         │                │
+  │  INPUT   │────────▶│   BREAKDOWN   │────────▶│   STORYBOARD   │
+  │  (PDF,   │         │    AGENT      │         │     AGENT      │
+  │  slides) │         │               │         │                │
   └──────────┘         └───────────────┘         └───────┬────────┘
-                              │                          │
                               │                          │
                               ▼                          ▼
                        ┌─────────────┐           ┌─────────────┐
@@ -164,57 +173,34 @@ Eduly uses a three-stage pipeline to convert academic papers into animated educa
                        │             │           │   topic)    │
                        └─────────────┘           └──────┬──────┘
                                                         │
-                                                        │
                               ┌──────────────────────────┘
-                              │
                               ▼
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│                                                                                 │
 │                          MANIM CODING AGENT                                     │
 │                         (Iterative Refinement)                                  │
 │                                                                                 │
-│   ┌─────────────────────────────────────────────────────────────────────────┐   │
-│   │                                                                         │   │
-│   │   ┌──────────┐     ┌──────────┐     ┌──────────┐     ┌──────────┐      │   │
-│   │   │          │     │          │     │          │     │          │      │   │
-│   │   │  PROMPT  │────▶│  LLM     │────▶│  MANIM   │────▶│ SUCCESS? │      │   │
-│   │   │          │     │  AGENT   │     │  RENDER  │     │          │      │   │
-│   │   │          │     │          │     │          │     │          │      │   │
-│   │   └──────────┘     └────┬─────┘     └──────────┘     └────┬─────┘      │   │
-│   │                         │                                  │           │   │
-│   │                         │                                  │           │   │
-│   │                         │    ┌─────────────────────────────┘           │   │
-│   │                         │    │                                         │   │
-│   │                         │    │  NO (iteration < max)                   │   │
-│   │                         │    │                                         │   │
-│   │                         │    ▼                                         │   │
-│   │                    ┌────────────────┐                                  │   │
-│   │                    │                │                                  │   │
-│   │                    │  ERROR         │──────────────────────────────────│───│──┐
-│   │                    │  FEEDBACK      │                                  │   │  │
-│   │                    │                │◀─────────────────────────────────│───│──┘
-│   │                    │                │                                  │   │
-│   │                    └────────────────┘                                  │   │
-│   │                                                                         │   │
-│   └─────────────────────────────────────────────────────────────────────────┘   │
+│   ┌──────────┐     ┌──────────┐     ┌──────────┐     ┌──────────┐             │
+│   │  PROMPT  │────▶│  LLM     │────▶│  MANIM   │────▶│ SUCCESS? │             │
+│   │          │     │  AGENT   │     │  RENDER  │     │          │             │
+│   └──────────┘     └────┬─────┘     └──────────┘     └────┬─────┘             │
+│                         │                                  │                   │
+│                         │         ┌────────────────────────┘                   │
+│                         │         │ NO (retry with error feedback)             │
+│                         │         ▼                                            │
+│                    ┌────────────────┐                                          │
+│                    │  ERROR         │◀─────────────────────────────────────────│
+│                    │  FEEDBACK      │──────────────────────────────────────────│
+│                    └────────────────┘                                          │
 │                                                                                 │
-│   Tools Available:                                                              │
-│   • ls / glob / grep - Navigate manim documentation                             │
-│   • read_file - Read docs and examples                                          │
-│   • edit_file - Modify scene.py                                                 │
-│   • write_file - Create new files                                               │
-│                                                                                 │
+│   Tools: ls, glob, grep, read_file, edit_file, write_file                      │
+│   Docs:  Full Manim documentation available to agent                           │
 └───────────────────────────────────────────────────────────────────────────┬─────┘
-                                                                            │
                                                                             │ YES
-                                                                            │
                                                                             ▼
                                                                ┌────────────────────┐
-                                                               │                    │
                                                                │   MP4 VIDEO        │
                                                                │   (1080×1920)      │
-                                                               │   Vertical Format  │
-                                                               │                    │
+                                                               │   Mobile-Ready     │
                                                                └────────────────────┘
 ```
 
@@ -222,129 +208,72 @@ Eduly uses a three-stage pipeline to convert academic papers into animated educa
 
 The `EdulyBreakdownClient` uses Gemini with Google Search to:
 - Extract **atomic topics** — self-contained concepts that can stand alone as ~5 minute videos
-- Generate comprehensive explanations with modern context (papers can be outdated)
+- Generate comprehensive explanations with modern context
 - Identify key takeaways for each topic
-
-**Output:** `Breakdown` object containing 5-15 `AtomicTopic` objects
 
 ### Stage 2: Storyboard Generation
 
 For each atomic topic, generate a **visual storyboard** in the style of 3Blue1Brown:
 - Define a core **visual metaphor** that makes the concept intuitive
 - Create 8-15 **scenes** with detailed visual descriptions
-- Write **narration** optimized for text-to-speech (complements visuals, doesn't duplicate)
-- Use concrete examples with actual numbers (3×3 matrices, not abstract shapes)
-
-**Output:** `TopicStoryboard` with `Scene` objects containing visual descriptions and narration
+- Write **narration** optimized for text-to-speech
+- Use concrete examples with actual numbers
 
 ### Stage 3: Manim Animation Agent
 
 The `EdulyAnimationClient` powers an **iterative coding agent** that:
-
-1. **Receives** the storyboard prompt with full context
-2. **Researches** Manim documentation using file system tools
-3. **Generates** a Manim `Scene` class in `scene.py`
-4. **Renders** the animation using `manim -ql scene.py`
-5. **Iterates** on errors — if rendering fails, the error is fed back to the agent
-
-The agent has access to:
-- `manim_docs/` — Full Manim documentation (tutorials, guides, API reference)
-- `animation_workspace/` — Working directory for `scene.py` and renders
-- File tools: `ls`, `read_file`, `write_file`, `edit_file`, `glob`, `grep`
-
-**Key features:**
-- **Vertical video format** (1080×1920) optimized for mobile/TikTok
-- **Concept caption bar** at the bottom of every scene
-- **Rich, detailed visualizations** — labeled components, real numbers, color-coded elements
-- **Up to N retry iterations** with error feedback for self-correction
+1. Receives the storyboard prompt with full context
+2. Researches Manim documentation using file system tools
+3. Generates a Manim `Scene` class
+4. Renders the animation
+5. Iterates on errors — if rendering fails, the error is fed back to the agent
 
 ---
 
-## Workspace Structure
-
-```
-agent_workspace/
-├── manim_docs/              # Manim documentation (read-only)
-│   ├── tutorials/           # Getting started guides
-│   ├── guides/              # In-depth how-to guides
-│   ├── reference/           # API documentation (385 files)
-│   └── reference_index/     # Category indices
-├── animation_workspace/     # Working directory
-│   ├── scene.py             # Generated Manim code
-│   └── media/               # Rendered output
-└── rendered_videos/         # Final output (auto-created)
-    └── {topic_name}_{index}.mp4
-```
-
----
-
-## Key Models
-
-| Model | Description |
-|-------|-------------|
-| `Breakdown` | Document breakdown with title, summary, and list of topics |
-| `AtomicTopic` | Self-contained topic with name, summary, full explanation, key takeaways |
-| `TopicStoryboard` | Visual storyboard with concept and list of scenes |
-| `Scene` | Individual scene with type (hook/mid/closing), visual description, narration |
-| `AnimationResult` | Result of animation generation (success, video path, iterations, errors) |
-
----
-
-## Future Work
+## Roadmap
 
 ### 🎙️ Narration & Text-to-Speech
-
-Currently, storyboards generate narration text but don't synthesize audio. Planned features:
 - Integration with TTS APIs (ElevenLabs, Google Cloud TTS, OpenAI TTS)
-- Automatic audio synchronization with Manim animations
-- Voice cloning for consistent narrator voice across series
-- Multi-language support via translation + localized TTS
+- Automatic audio synchronization with animations
+- Multi-language support
 
-### 📱 Web & Mobile Application
+### 📱 Web & Mobile Platform
+- Mobile-first design with vertical video player
+- Personalized feed based on interests
+- Paper submissions for automatic processing
+- Progress tracking
 
-Transform Eduly from a library into a full platform:
-- **Mobile-first design** — Vertical video player with swipe navigation
-- **Social features** — Like, share, save to collections
-- **Personalized feed** — AI-curated content based on interests and skill level
-- **Paper submissions** — Users can submit arXiv links for automatic processing
-- **Progress tracking** — Track topics learned, suggest next videos
-- **Offline mode** — Download videos for learning without connectivity
+### 🎬 Multimodal Feedback Loop
+- Video-to-feedback pipeline using vision-language models
+- Storyboard alignment scoring
+- Visual quality assessment
+- Educational clarity evaluation
 
-### 🔬 Research Monitoring
+### 🤖 RL Environment for Manim
+- Train specialized models to become expert Manim animators
+- Reward signals for render success, alignment, aesthetics, and educational value
 
-Automated pipeline for new content:
-- Monitor arXiv categories (cs.LG, cs.CV, cs.CL, etc.)
-- Detect trending papers by citation velocity
-- Auto-generate breakdowns and queue for animation
-- Push notifications for topics users follow
+---
 
-### 🎬 Multimodal LLM-as-Judge Feedback
+## Contributing
 
-Enhance the iterative refinement loop with visual feedback from multimodal models:
-- **Video-to-feedback pipeline** — After rendering, pass the MP4 to a vision-language model (Gemini Pro Vision, GPT-4o, Claude) to evaluate the output
-- **Storyboard alignment scoring** — LLM compares rendered video against original storyboard descriptions to identify mismatches
-- **Visual quality assessment** — Detect issues like overlapping text, elements cut off at edges, poor color contrast, or animations that are too fast/slow
-- **Educational clarity scoring** — Evaluate whether the visualization actually teaches the concept effectively
-- **Actionable improvement suggestions** — Generate specific, code-level feedback ("The attention matrix at 0:34 should highlight row 2, not row 3")
-- **Multi-turn refinement** — Chain multiple judge → fix → render cycles for higher quality output
+**Help us build the future of learning.**
 
-### 🤖 RL Environment for Manim Coders
+We're just getting started. Join the mission—contribute code, share ideas, or simply spread the word.
 
-Train specialized open-source models to become expert Manim animators:
-- **Gymnasium environment** — Define state (storyboard + current code), actions (code edits), and rewards (render success + quality scores)
-- **Reward signal composition**:
-  - Binary: Does the code render without errors?
-  - Alignment: How well does output match storyboard (via LLM-as-Judge)?
-  - Aesthetics: Visual quality metrics (layout, timing, readability)
-  - Educational: Does it effectively teach the concept?
+- 🐛 **Found a bug?** [Open an issue](https://github.com/eduly-ai/eduly/issues)
+- 💡 **Have an idea?** Start a [discussion](https://github.com/eduly-ai/eduly/discussions)
+- 🔧 **Want to contribute?** Check out our [contributing guide](CONTRIBUTING.md)
+- 💬 **Join the community:** [Discord](https://discord.gg/eduly)
 
 ---
 
 ## License
 
-This project is licensed under **CC-BY-NC-SA-4.0** — you're free to share and adapt the work for non-commercial purposes with attribution.
+This project is licensed under **CC-BY-NC-SA-4.0** — free to share and adapt for non-commercial purposes with attribution.
 
 ---
 
-## Contributing
-Please open an issue to discuss your ideas if you wish to submit a PR! Thanks
+<p align="center">
+  <strong>Knowledge belongs to everyone.</strong>
+</p>

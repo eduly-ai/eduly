@@ -33,6 +33,11 @@ license = "CC-BY-NC-SA-4.0"
 Homepage = "https://github.com/eduly-ai/eduly"
 Issues = "https://github.com/eduly-ai/eduly/issues"
 
+[project.optional-dependencies]
+dev = [
+    "pandas>=2.3.3",
+]
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/eduly"]
 

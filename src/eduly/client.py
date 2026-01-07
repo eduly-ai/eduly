@@ -7,6 +7,8 @@ import subprocess
 import time
 from collections.abc import Callable
 
+from deepagents import create_deep_agent
+from deepagents.backends import FilesystemBackend
 from google import genai
 from google.genai import types as gemini_types
 from langchain_core.language_models import BaseChatModel
@@ -201,8 +203,6 @@ class EdulyAnimationClient:
 
     def _create_agent(self):
         """Create a new coding agent instance."""
-        from deepagents import create_deep_agent
-        from deepagents.backends import FilesystemBackend
 
         return create_deep_agent(
             model=self.langchain_model,
